@@ -1,4 +1,4 @@
-(ns clojure-problems.3)
+(ns clojure-problems.7)
 
 (defn factor-of? [a b]
     (zero? (mod b a)))
@@ -14,12 +14,4 @@
         (let [sieved-coll (filter #(not (factor-of? i %)) coll)]
           (recur (conj primes i) (first sieved-coll) sieved-coll))))))
 
-(defn lpf
-  "Find largest prime factor of a number"
-  [n]
-  (let [possible-primes (sieve (int (Math/sqrt n)))
-        factors (filter #(factor-of? % n) possible-primes)]
-    (last factors)))
-
-
-(lpf 600851475143)
+(nth (sieve 10000000) 10000)
