@@ -42,18 +42,21 @@
   [(f x y) (f (inc x) y) (f (+ x 2) y) (f (+ x 3) y)])
 
 (defn largest-multiple []
-  (apply max (map #(apply * %) (concat
-                                (for [x (range 17)
-                                      y (range 17)]
-                                  (get-right-diagonal x y))
-                                (for [x (range 3 20)
-                                      y (range 17)]
-                                  (get-left-diagonal x y))
-                                (for [x (range 20)
-                                      y (range 17)]
-                                  (get-vertical x y))
-                                (for [x (range 17)
-                                      y (range 20)]
-                                  (get-horizontal x y))))))
+  (apply max (map #(apply * %)
+                  (concat
+                    (for [x (range 17)
+                          y (range 17)]
+                      (get-right-diagonal x y))
+                    (for [x (range 3 20)
+                          y (range 17)]
+                      (get-left-diagonal x y))
+                    (for [x (range 20)
+                          y (range 17)]
+                      (get-vertical x y))
+                    (for [x (range 17)
+                          y (range 20)]
+                      (get-horizontal x y))))))
 
 (prn (largest-multiple))
+
+
