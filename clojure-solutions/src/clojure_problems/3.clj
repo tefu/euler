@@ -4,11 +4,11 @@
     (zero? (mod b a)))
 
 (defn sieve [n]
-  "Returns all the primes less than a number n"
+  "Returns all the primes less than or equal to a number n"
   (let [limit (Math/floor (Math/sqrt n))]
     (loop [primes []
            i 2
-           coll (range 2 n)]
+           coll (range 2 (inc n))]
       (if (> i limit)
         (concat primes coll)
         (let [sieved-coll (filter #(not (factor-of? i %)) coll)]
@@ -22,4 +22,5 @@
     (last factors)))
 
 
-(lpf 600851475143)
+;; (lpf 600851475143)
+

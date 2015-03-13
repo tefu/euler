@@ -7,4 +7,6 @@
       f
       (recur (dec n) (* f n)))))
 
-(apply + (get-digits (fact (bigint 100))))
+
+; (apply + (get-digits (fact (bigint 100))))
+
