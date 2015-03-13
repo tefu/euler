@@ -28,4 +28,3 @@
          (= a (sum-divisors b)))))
 
 ; (apply + (filter amicable? (range 2 10001)))
-
