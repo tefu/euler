@@ -6,4 +6,5 @@
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/math.numeric-tower "0.0.4"]
                  [org.clojure/core.logic "0.8.8"]
-                 [org.clojure/math.combinatorics "0.0.8"]])
+                 [org.clojure/math.combinatorics "0.0.8"]
+                 [org.clojure/tools.macro "0.1.2"]])
