@@ -17,17 +17,18 @@
    [63 66 4 68 89 53 67 30 73 16 69 87 40 31]
    [4 62 98 27 23 9 70 98 73 93 38 53 60 4 23]])
 
+(defn bubble-rows-up [bottom-row top-row]
+  (letfn [(pair-up [coll] 
+            (if (< (count coll) 2) 
+              []
+              (conj (pair-up (rest coll))
+                    [(nth coll 0) (nth coll 1)])))]
+    (map + top-row 
+         (map #(apply max %) (reverse (pair-up bottom-row))))))
 
-(defn is-increasing? [coll]
-  (if (or (empty? (rest coll)) (empty? coll))
-    true
-    (let [a (first coll)
-          b (first (rest coll))]
-      (if (<= a b)
-        (is-increasing? (rest coll))
-        false))))
+(defn shortest-cost [triangle]
+  (let [cone (reverse triangle)]
+    (first (reduce bubble-rows-up cone))))
 
-(defn trace-path [sequence]
-  (map nth triangle sequence))
+(comment (shortest-cost triangle))
 
-(apply + (trace-path [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0]))
