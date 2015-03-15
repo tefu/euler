@@ -3,16 +3,20 @@
 (defn factor-of? [a b]
     (zero? (mod b a)))
 
+(def primes "Generates an infinite, lazy sequence of prime numbers"
+  (let [reinsert (fn [table x prime]
+                   (update-in table [(+ prime x)] conj prime))]
+    (letfn [(primes-step [table d]
+              (if-let [factors (get table d)]
+                (recur (reduce #(reinsert %1 d %2) (dissoc table d) factors)
+                       (inc d))
+                (lazy-seq (cons d (primes-step (assoc table (* d d) (list d))
+                                               (inc d))))))]
+      (primes-step {} 2))))
+
 (defn sieve [n]
   "Returns all the primes less than or equal to a number n"
-  (let [limit (Math/floor (Math/sqrt n))]
-    (loop [primes []
-           i 2
-           coll (range 2 (inc n))]
-      (if (> i limit)
-        (concat primes coll)
-        (let [sieved-coll (filter #(not (factor-of? i %)) coll)]
-          (recur (conj primes i) (first sieved-coll) sieved-coll))))))
+  (take-while #(<= % n) primes))
 
 (defn lpf
   "Find largest prime factor of a number"
